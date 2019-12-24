@@ -10,6 +10,7 @@
 * [Connecting to your machine in general](#connecting-to-your-machine-in-general)
 * [Setting up your ML Environment on your Virtual Machine](#setting-up-your-ml-environment-on-your-virtual-machine)
 * [Setting up Jupyter Notebook on your Virtual Machine](#setting-up-jupyter-notebook-on-your-virtual-machine)
+* [Google Cloud Platform Best Practices](#google-cloud-platform-best-practices)
 
 ### Creating your virtual machine:
 1. Go to https://console.cloud.google.com and sign in to your Google Account
@@ -119,3 +120,24 @@
 5. Now open your browser and type in *localhost:8888*
 6. It will ask you for a token, go back to your **virtual machine** screen and find the following line on the screen `http://localhost:8887/?token=*************************************`
 7. Copy everything after the `=` sign and paste that into the text box on the screen asking you for a token
+
+### Google Cloud Platform Best Practices
+1. Always stop your virtual machine after you are done using it. You can do this by going to the google compute engine dashboard, selecting your virtual machine and hitting stop.
+    * When you want to connect again, go back to the dashboard, select your virtual machine and hit start
+2. If you will not be using your machine for while, stop your machine like in step 1.
+    * Find the *Disks* button on the left hand side and click it
+    * Select the disk associated with your machine and click the three dots button under *Actions*
+    * Select "Create Snapshot" and name your snapshot something that will allow you to remember when you created this snapshot
+    * Once the snapshot has finished, delete your instance
+    * To re-create your instance, find the *VM instances* button and click on it
+    * Click the "new" button
+    * Configure the machine how'd you like it to be configured
+        - The standard configuration is:
+            + `Machine Type`: n1-highmem-2 (2 vCPUs, 13 GB memory)
+            + `CPU platform`: Intel Haswell
+            + `GPUs`: 1 x NVIDIA Tesla K80
+                * To add the GPU you have to hit the *CPU platform and GPU* button and then hit the *Add GPU* button
+            + Whatever your appropriate zone is
+    * Under the *Boot Disk* option you hit the *Change* button
+    * Hit the *Snapshots* button in the new menu and select the appropriate snapshot you created
+    * Finally you hit the *Create* button
